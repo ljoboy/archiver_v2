@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Users extends CI_Model
 {
 	private $table = 'utilisateur';
+	private $id = 'id';
 
 	function connectUser($pseudo, $mdp)
 	{
@@ -18,7 +19,7 @@ class Users extends CI_Model
 
 	function get_all_users($params = array())
 	{
-		$this->db->order_by('id', 'desc');
+		$this->db->order_by($this->id, 'desc');
 		if(isset($params) && !empty($params))
 		{
 			$this->db->limit($params['limit'], $params['offset']);
@@ -27,7 +28,7 @@ class Users extends CI_Model
 	}
 
 	function get_user($id){
-		return $this->db->get_where($this->table,array('id' => $id))->row();
+		return $this->db->get_where($this->table,array($this->id => $id))->row();
 	}
 
 	function add_user($user){
@@ -35,5 +36,8 @@ class Users extends CI_Model
 		return $this->db->insert_id();
 	}
 
-
+	function update_user($id, $user){
+		$this->db->where($this->id, $id);
+		return $this->db->update($this->table, $user);
+	}
 }
