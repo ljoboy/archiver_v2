@@ -29,4 +29,11 @@ class Users extends CI_Model
 	function get_user($id){
 		return $this->db->get_where($this->table,array('id' => $id))->row();
 	}
+
+	function add_user($user){
+		$this->db->insert($this->table, $user);
+		return $this->db->insert_id();
+	}
+
+
 }
