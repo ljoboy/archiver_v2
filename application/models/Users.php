@@ -4,9 +4,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Users extends CI_Model
 {
 	private $table = 'utilisateur';
+
 	function connectUser($pseudo, $mdp)
 	{
-		return $this->db->get_where('utilisateur', array('login' => $pseudo, 'mdp' => $mdp))->row();
+		return $this->db->get_where($this->table, array('login' => $pseudo, 'mdp' => $mdp))->row();
 	}
 
 	function get_all_users_count()
@@ -23,5 +24,9 @@ class Users extends CI_Model
 			$this->db->limit($params['limit'], $params['offset']);
 		}
 		return $this->db->get($this->table)->result();
+	}
+
+	function get_user($id){
+		return $this->db->get_where($this->table,array('id' => $id))->row();
 	}
 }
