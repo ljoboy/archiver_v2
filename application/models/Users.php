@@ -7,4 +7,10 @@ class Users extends CI_Model
 	{
 		return $this->db->get_where('utilisateur', array('login' => $pseudo, 'mdp' => $mdp))->row();
 	}
+
+	function get_all_users_count()
+	{
+		$this->db->from('utilisateur');
+		return $this->db->count_all_results();
+	}
 }
