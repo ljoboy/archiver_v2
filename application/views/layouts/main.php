@@ -140,8 +140,30 @@
 
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
-                <!-- Main content -->
-                <section class="content">
+				<section class="content-header">
+					<?php
+					if (isset($this->session->succes)) : ?>
+						<div class="alert alert-info alert-dismissible">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+							<h4><i class="icon fa fa-info"></i> Alerte !</h4>
+							<?= $this->session->succes; ?>
+						</div>
+					<?php
+					elseif (isset($this->session->error)) :
+						?>
+						<div class="alert alert-danger alert-dismissible">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+							<h4><i class="icon fa fa-ban"></i> Alerte !</h4>
+							<?= $this->session->error; ?>
+						</div>
+					<?php endif ?>
+					<h1>
+						<?= isset($title) ? $title : '' ?>
+						<small><?= isset($desc) ? $desc : '' ?></small>
+					</h1>
+				</section>
+				<!-- Main content -->
+                <section class="content container-fluid">
                     <?= (isset($_view)) ? $_view : "" ?>
                 </section>
                 <!-- /.content -->
