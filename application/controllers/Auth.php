@@ -26,6 +26,7 @@ class Auth extends CI_Controller {
 			$pseudo = $this->input->post('pseudo', true);
 			$mdp = sha1($this->input->post('mdp'));
 			$user = $this->users->connectUser($pseudo, $mdp);
+			$type = ['utilisateur', 'archiviste', 'administrateur'];
 			if ($user != null) {
 				$array = array(
 					'id' => $user->id,
@@ -33,6 +34,7 @@ class Auth extends CI_Controller {
 					'level' => $user->level,
 					'cree_le' => $user->creer_le,
 					'nom_complet' => $user->nom_complet,
+					'type' => $type[$user->level],
 					'is_connected' => true
 				);
 
