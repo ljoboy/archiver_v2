@@ -18,7 +18,7 @@
 					</tr>
 					<?php
 					$i = 1;
-					$type = ['utilisateur', 'archiviste', 'administrateur'];
+					$type = ['administrateur', 'archiviste', 'agent'];
 					foreach($users as $user){ ?>
 						<tr>
 							<td><?php echo $i ?></td>
