@@ -42,6 +42,7 @@ class Auth extends CI_Controller {
 				redirect('archive');
 			} else {
 				$this->session->set_flashdata('error', "<h3>Echec d'authentification !</h3> Combinaison <strong>Pseudo / Mot de passe</strong> Incorrecte !");
+				$this->session->set_flashdata('pseudo', $pseudo);
 				redirect();
 			}
 		} else {

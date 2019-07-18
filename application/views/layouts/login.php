@@ -63,7 +63,7 @@
 		<div class="form-group has-feedback">
 			<label for="pseudo"></label>
 			<input autocomplete="username" class="form-control" id="pseudo" name="pseudo" placeholder="Nom d'utilisateur"
-				   type="text"/>
+				   type="text" value="<?= $this->session->pseudo; ?>"/>
 			<span class="glyphicon glyphicon-user form-control-feedback"></span>
 			<span class="text-danger"><?php echo form_error('pseudo'); ?></span>
 		</div>
