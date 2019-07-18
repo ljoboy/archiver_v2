@@ -59,7 +59,7 @@
 			</div>
 		<?php endif; ?>
 
-		<?= form_open(site_url('auth/login')) ?>
+		<?= form_open(site_url('auth/index')) ?>
 		<div class="form-group has-feedback">
 			<label for="pseudo"></label>
 			<input autocomplete="username" class="form-control" id="pseudo" name="pseudo" placeholder="Nom d'utilisateur"
