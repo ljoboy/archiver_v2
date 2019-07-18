@@ -36,7 +36,7 @@
         <div class="wrapper">
             <header class="main-header">
                 <!-- Logo -->
-                <a href="" class="logo">
+                <a href="<?= base_url() ?>" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><?= APPNAME_INIT ?></span>
                     <!-- logo for regular state and mobile devices -->
@@ -66,7 +66,7 @@
                                         <img src="<?php echo base_url('assets/img/avatarm.png');?>" class="img-circle" alt="User Image">
 
                                     <p>
-                                        <?= ucwords($this->session->nom_complet) ?> - Web Developer
+                                        <?= ucwords($this->session->nom_complet) ?> - <?= ucfirst($this->session->type) ?>
                                         <small>Membre depuis <?= nice_date($this->session->cree_le,"M, Y") ?></small>
                                     </p>
                                     </li>
