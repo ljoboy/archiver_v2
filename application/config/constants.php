@@ -84,6 +84,11 @@ defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
+//Les constantes perso
+
 defined('RECORDS_PER_PAGE') OR define('RECORDS_PER_PAGE', 10);
 defined('APP_NAME') OR define('APP_NAME', 'TFC Laure');
 defined('APPNAME_INIT') OR define('APPNAME_INIT', 'TFC');
+defined('ADMIN_LEVEL') OR define('ADMIN_LEVEL', 0);
+defined('ARCHIVISTE_LEVEL') OR define('ARCHIVISTE_LEVEL', 1);
+defined('AGENT_LEVEL') OR define('AGENT_LEVEL', 2);
