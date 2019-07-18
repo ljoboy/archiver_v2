@@ -7,15 +7,15 @@ class Auth extends CI_Controller {
 	{
 		parent::__construct();
 		if (isset($this->session->is_connected)){
-			redirect('archives/index');
+			redirect('archive/index');
 		}
 		$this->load->model('users');
 	}
 
 	public function index()
 	{
-		$data = [];
-		$this->load->view('layout/login', $data, FALSE);
+		$data['title'] = "page d'authentification";
+		$this->load->view('layouts/login', $data, FALSE);
 	}
 
 	public function login()
@@ -29,14 +29,15 @@ class Auth extends CI_Controller {
 			if ($user != null) {
 				$array = array(
 					'id' => $user->id,
-					'pseudo' => $user->pseudo,
-					'is_admin' => $user->is_admin,
-					'is_archiviste' => $user->is_archiviste,
+					'login' => $user->pseudo,
+					'level' => $user->level,
+					'cree_le' => $user->creer_le,
+					'nom_complet' => $user->nom_complet,
 					'is_connected' => true
 				);
 
 				$this->session->set_userdata($array);
-				redirect('archives');
+				redirect('archive');
 			} else {
 				$this->session->set_flashdata('error', "<h3>Echec d'authentification !</h3> Combinaison <strong>Pseudo / Mot de passe</strong> Incorrecte !");
 				redirect();

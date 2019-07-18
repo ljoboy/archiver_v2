@@ -86,3 +86,4 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 defined('RECORDS_PER_PAGE') OR define('RECORDS_PER_PAGE', 10);
 defined('APP_NAME') OR define('APP_NAME', 'TFC Laure');
+defined('APPNAME_INIT') OR define('APPNAME_INIT', 'TFC');
