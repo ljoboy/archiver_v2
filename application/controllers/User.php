@@ -78,4 +78,15 @@ class User extends CI_Controller {
 
 		}
 	}
+
+	public function remove($id)
+	{
+		$user  = $this->users->delete_user($id);
+		if ($user){
+			$this->session->set_flashdata('success', 'Utilisateur supprimer avec succès');
+		}else{
+			$this->session->set_flashdata('error', 'Utilisateur non-existant');
+		}
+		redirect('user/index');
+	}
 }
