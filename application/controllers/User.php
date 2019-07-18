@@ -19,7 +19,6 @@ class User extends CI_Controller {
 			redirect('archive');
 		}
 
-		$this->load->helper('date');
 		$params['limit'] = RECORDS_PER_PAGE;
 		$params['offset'] = ($this->input->get('per_page')) ? $this->input->get('per_page') : 0;
 
@@ -33,6 +32,12 @@ class User extends CI_Controller {
 		$data['_view'] = $this->load->view('users/index', $data, true);
 		$this->load->view('layouts/main',$data);
 	}
+
+	public function add()
+	{
+		//TODO Implement this
+	}
+	
 	function logout()
 	{
 		$this->session->unset_userdata('is_connected');
