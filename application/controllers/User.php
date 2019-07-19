@@ -10,7 +10,7 @@ class User extends CI_Controller {
 			redirect('auth/index');
 		}
 		if ($this->session->level != ADMIN_LEVEL){
-			redirect('archive');
+			redirect('archive/index');
 		}
 		$this->load->model('users');
 	}
