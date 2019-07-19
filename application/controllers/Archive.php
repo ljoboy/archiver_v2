@@ -24,7 +24,18 @@ class Archive extends CI_Controller {
 
 		$data['archives'] = $this->archives->get_all_archives($params);
 
+		$this->load->model('users');
+		$data['users'] = $this->users->get_all_users();
+
 		$data['_view'] = $this->load->view('archives/index', $data, true);
 		$this->load->view('layouts/main',$data);
+	}
+
+	public function add()
+	{
+		//TODO Implement this
+		$data = [];
+		$data['_view'] = $this->load->view('archives/add', $data, TRUE);
+		$this->load->view('layouts/main', $data, FALSE);
 	}
 }
