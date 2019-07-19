@@ -12,5 +12,19 @@ class Archive extends CI_Controller {
 		$this->load->model('archives');
 	}
 
+	public function index()
+	{
+		$params['limit'] = RECORDS_PER_PAGE;
+		$params['offset'] = ($this->input->get('per_page')) ? $this->input->get('per_page') : 0;
 
+		$config = $this->config->item('pagination');
+		$config['base_url'] = site_url('archive/index?');
+		$config['total_rows'] = $this->archives->get_all_archives_count();
+		$this->pagination->initialize($config);
+
+		$data['archives'] = $this->archives->get_all_archives($params);
+
+		$data['_view'] = $this->load->view('archives/index', $data, true);
+		$this->load->view('layouts/main',$data);
+	}
 }
