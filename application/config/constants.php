@@ -87,8 +87,8 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 //Les constantes perso
 
 defined('RECORDS_PER_PAGE') OR define('RECORDS_PER_PAGE', 10);
-defined('APP_NAME') OR define('APP_NAME', 'TFC Laure');
-defined('APPNAME_INIT') OR define('APPNAME_INIT', 'TFC');
+defined('APP_NAME') OR define('APP_NAME', 'Afritac Agency Archiver');
+defined('APPNAME_INIT') OR define('APPNAME_INIT', '<i class="fa fa-archive 2x"></i>');
 defined('ADMIN_LEVEL') OR define('ADMIN_LEVEL', 0);
 defined('ARCHIVISTE_LEVEL') OR define('ARCHIVISTE_LEVEL', 1);
 defined('AGENT_LEVEL') OR define('AGENT_LEVEL', 2);
