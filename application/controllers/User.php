@@ -75,7 +75,6 @@ class User extends CI_Controller {
 			$data['title'] = 'ajouter un utilisateur';
 			$data['_view'] = $this->load->view('users/add', $user_info, true);
 			$this->load->view('layouts/main', $data, FALSE);
-
 		}
 	}
 
@@ -113,8 +112,6 @@ class User extends CI_Controller {
 				redirect('user/index');
 			}
 		}
-
-
 	}
 
 	public function remove($id)
