@@ -33,9 +33,37 @@ class Archive extends CI_Controller {
 
 	public function add()
 	{
-		//TODO Implement this
-		$data = [];
-		$data['_view'] = $this->load->view('archives/add', $data, TRUE);
-		$this->load->view('layouts/main', $data, FALSE);
+		$config['upload_path']          = './archives/';
+		$config['allowed_types']        = 'gif|jpg|png';
+		$config['max_size']             = 100;
+		$config['max_width']            = 1024;
+		$config['max_height']           = 768;
+
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload('img'))
+		{
+			$error = array('error' => $this->upload->display_errors());
+
+			$data['_view'] = $this->load->view('archives/add', $error, true);
+			$this->load->view('layouts/main', $data, false);
+		}
+		else
+		{
+			$img_infos = array('upload_data' => $this->upload->data());
+			$archive = [
+				'url' => $this->upload->data('full_path')
+			];
+			$archive_id = $this->archives->add_archive($archive);
+			if ($archive_id){
+				$img_infos['archive_id'] = $archive_id;
+
+				$data['_view'] = $this->load->view('archives/add2', $img_infos, true);
+				$this->load->view('layouts/main', $data, false);
+			}else{
+				redirect('archive/add');
+			}
+
+		}
 	}
 }
