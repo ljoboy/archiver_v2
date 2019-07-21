@@ -79,6 +79,44 @@ class User extends CI_Controller {
 		}
 	}
 
+	public function edit($id)
+	{
+		$this->form_validation->set_rules('nom_complet', 'nom complet', 'trim|required|min_length[3]|max_length[150]',
+			['required' => "Le %s est un champ obligatoire", 'min_length' => 'Le %s doit contenir plus de 3 caractères',
+				'max_length' => 'Le %s doit contenir moins de 50 caractères']);
+		$this->form_validation->set_rules('login', "nom d'utilisateur", 'trim|required|min_length[3]|max_length[50]',
+			['required' => "Le %s est un champ obligatoire", 'min_length' => 'Le %s doit contenir plus de 3 caractères',
+				'max_length' => 'Le %s doit contenir moins de 50 caractères']);
+		$this->form_validation->set_rules('level', 'type de compte', 'trim|required|in_list[0,1,2]',
+			['required' => "Le %s est un champ obligatoire", 'in_list' => 'Action interdite opérée sur %s']);
+
+		if ($this->form_validation->run() == true) {
+			$updated_user = [
+			    'nom_complet' => $this->input->post('nom_complet', true),
+				'login' => $this->input->post('login', true),
+				'level' => $this->input->post('level', true)
+			];
+			if ($this->users->update_user($id, $updated_user)){
+				$this->session->set_flashdata('succes', "Utilisateur modifier avec succes !");
+			}else{
+				$this->session->set_flashdata('error', 'Erreur inattendu, veuillez reessayer plutard svp !');
+			}
+			redirect('user/index');
+		} else {
+			$user_info = $this->users->get_user($id);
+			if ($user_info){
+				$data['title'] = 'modifier un utilisateur';
+				$data['_view'] = $this->load->view('users/update', $user_info, true);
+				$this->load->view('layouts/main', $data, false);
+			}else{
+				$this->session->set_flashdata('error', "Cette utilisateur n'existe pas");
+				redirect('user/index');
+			}
+		}
+
+
+	}
+
 	public function remove($id)
 	{
 		$user  = $this->users->delete_user($id);
