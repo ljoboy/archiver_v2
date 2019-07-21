@@ -37,10 +37,7 @@
 				<label class="col-sm-2 control-label" for="level">Type de compte :</label>
 				<div class="col-sm-10">
 					<select id="level" name="level" class="form-control select2" style="width: 100%;" required>
-						<?php
-						$level = isset($level) ? $level : AGENT_LEVEL;
-						?>
-						?>
+						<?php $level = isset($level) ? $level : AGENT_LEVEL; ?>
 						<option disabled>Choisissez le type de compte</option>
 						<option value="<?= AGENT_LEVEL ?>" <?= ($level == AGENT_LEVEL) ?'selected' : '' ?>>Agent</option>
 						<option value="<?= ARCHIVISTE_LEVEL ?>" <?= ($level == ARCHIVISTE_LEVEL) ?'selected' : '' ?>>Archiviste</option>
