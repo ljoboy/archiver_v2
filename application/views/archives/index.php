@@ -30,14 +30,14 @@
 						}?>
 						<tr>
 							<td><?php echo $i ?></td>
-							<td><?php echo $archive->codeArchi; ?></td>
+							<td><?php echo strtoupper($archive->codeArchi); ?></td>
 							<td><?php echo ucfirst($archive->nom); ?></td>
 							<td><?php echo nice_date($archive->archiver_le,'d-m-Y H:i:s') ?></td>
 							<td><?php echo ($user_k) ? ucwords($user_k->nom_complet) : "" ?></td>
 							<td><?php echo strtoupper($archive->entreprise) ?></td>
 							<td>
-								<a href="<?php echo site_url('archive/download/'.$archive->id); ?>" class="btn btn-info btn-xs"><span class="fa fa-download"></span> Télécharger</a>
-								<a href="<?php echo site_url('archive/read/'.$archive->id); ?>" class="btn btn-danger btn-xs" ><span class="fa fa-trash"></span> Voir</a>
+								<a href="<?php echo site_url('archive/download/'.$archive->idArchi); ?>" class="btn btn-info btn-xs"><span class="fa fa-download"></span> Télécharger</a>
+								<a href="<?php echo site_url('archive/read/'.$archive->idArchi); ?>" class="btn btn-danger btn-xs" ><span class="fa fa-trash"></span> Voir</a>
 							</td>
 						</tr>
 						<?php $i++;

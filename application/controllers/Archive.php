@@ -35,7 +35,7 @@ class Archive extends CI_Controller {
 	{
 		$config['upload_path']          = './archives/';
 		$config['allowed_types']        = 'gif|jpg|png';
-		$config['max_size']             = 100;
+		$config['max_size']             = 2 * 1024;
 		$config['max_width']            = 1024;
 		$config['max_height']           = 768;
 
@@ -52,18 +52,58 @@ class Archive extends CI_Controller {
 		{
 			$img_infos = array('upload_data' => $this->upload->data());
 			$archive = [
-				'url' => $this->upload->data('full_path')
+				'url' => $this->upload->data('file_name'),
+				'archiver_par' => $this->session->id
 			];
 			$archive_id = $this->archives->add_archive($archive);
 			if ($archive_id){
 				$img_infos['archive_id'] = $archive_id;
+				$img_infos['url'] = $this->upload->data('file_name');
 
-				$data['_view'] = $this->load->view('archives/add2', $img_infos, true);
+				$data['_view'] = $this->load->view('archives/add-2', $img_infos, true);
 				$this->load->view('layouts/main', $data, false);
 			}else{
 				redirect('archive/add');
 			}
 
+		}
+	}
+
+	public function step_2()
+	{
+		$this->form_validation->set_rules('archive_id', 'archive id', 'required|is_natural_no_zero');
+		$this->form_validation->set_rules('archive_url', 'archive url', 'required');
+		$this->form_validation->set_rules('code', 'code', 'trim|required|alpha_dash|min_length[6]|max_length[50]|is_unique[archive.codeArchi]',
+			['required' => "Le %s est un champ obligatoire", 'alpha_dash' => "Le %s contient des caractères non supportés", 'min_length' => "Le %s doit contenir au moins 6 caractères", 'max_length' => "Le %s doit contenir moins de 50 caractères", "Un %s similaire existe dans la base des données pourtant %s est un doit etre unique"]);
+		$this->form_validation->set_rules('nom', 'nom', 'trim|required|alpha_numeric_spaces|min_length[4]|max_length[50]',
+			['required' => "Le %s est un champ obligatoire", 'alpha_numeric_spaces' => "Le %s contient des caractères non supportés", 'min_length' => "Le %s doit contenir au moins 4 caractères", 'max_length' => "Le %s doit contenir moins de 50 caractères"]);
+		$this->form_validation->set_rules('entreprise', 'entreprise', 'trim|required|alpha_numeric_spaces|min_length[4]|max_length[50]',
+			['required' => "Le %s est un champ obligatoire", 'alpha_numeric_spaces' => "Le %s contient des caractères non supportés", 'min_length' => "Le %s doit contenir au moins 4 caractères", 'max_length' => "Le %s doit contenir moins de 50 caractères"]);
+
+		if ($this->form_validation->run() == true) {
+			$archive_id = $this->input->post('archive_id', true);
+			$archive = [
+				'nom' => $this->input->post('nom',true),
+				'codeArchi' => $this->input->post('code',true),
+				'entreprise' => $this->input->post('entreprise',true)
+			];
+			$updated = $this->archives->update_archive($archive_id, $archive);
+			if ($updated){
+				$this->session->set_flashdata('succes', '<h4>Archive ajoutée avec succès !</h4>');
+			}else{
+				$this->session->set_flashdata('error', '<h4>Erreur inattendu !</h4> veuillez réessayer plus tard svp...');
+			}
+			redirect('archive/index');
+		} else {
+			$img_infos['archive_id'] = $this->input->post('archive_id', true);
+			$img_infos['url'] = $this->input->post('archive_url', true);
+
+			if ($img_infos['archive_id']){
+				$data['_view'] = $this->load->view('archives/add-2', $img_infos, true);
+				$this->load->view('layouts/main', $data, false);
+			}else{
+				redirect('archive/add');
+			}
 		}
 	}
 }

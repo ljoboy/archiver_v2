@@ -2,6 +2,8 @@
 <div class="box box-primary">
 	<div class="box-header">
 		<h3 class="box-title">Completer ces informations :</h3>
+		<hr>
+		<?= $error ?>
 	</div>
 	<div class="box-body">
 		<div class="form-group">
