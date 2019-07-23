@@ -9,7 +9,7 @@
 		<div class="form-group">
 			<label class="col-sm-2 control-label" for="img">Image :</label>
 			<div class="col-sm-10">
-				<input accept="image/*" class="form-control" id="img" name="img" required type="file" size="20"/>
+				<input accept="*" class="form-control" id="img" name="img" required type="file" size="20"/>
 				<span class="text-danger"><?php echo form_error('img'); ?></span>
 			</div>
 		</div>

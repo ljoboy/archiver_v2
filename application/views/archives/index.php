@@ -36,8 +36,10 @@
 							<td><?php echo ($user_k) ? ucwords($user_k->nom_complet) : "" ?></td>
 							<td><?php echo strtoupper($archive->entreprise) ?></td>
 							<td>
-								<a href="<?php echo site_url('archive/download/'.$archive->idArchi); ?>" class="btn btn-info btn-xs"><span class="fa fa-download"></span> Télécharger</a>
-								<a href="<?php echo site_url('archive/read/'.$archive->idArchi); ?>" class="btn btn-danger btn-xs" ><span class="fa fa-trash"></span> Voir</a>
+								<a class="btn btn-info btn-xs" href="<?php echo site_url('archive/download/' . $archive->idArchi); ?>"
+								   target="_blank"><span class="fa fa-download"></span> Télécharger</a>
+								<a href="<?= site_url('') ?>"
+								   class="btn btn-success btn-xs"><span class="fa fa-eye"></span> Voir</a>
 							</td>
 						</tr>
 						<?php $i++;

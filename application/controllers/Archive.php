@@ -34,10 +34,8 @@ class Archive extends CI_Controller {
 	public function add()
 	{
 		$config['upload_path']          = './archives/';
-		$config['allowed_types']        = 'gif|jpg|png';
-		$config['max_size']             = 2 * 1024;
-		$config['max_width']            = 1024;
-		$config['max_height']           = 768;
+		$config['allowed_types']        = '*';
+		$config['max_size']             = 8 * 1024;
 
 		$this->load->library('upload', $config);
 
@@ -105,5 +103,35 @@ class Archive extends CI_Controller {
 				redirect('archive/add');
 			}
 		}
+	}
+
+	public function download($id)
+	{
+		$archive = $this->archives->get_archive($id);
+		$path = FCPATH.'/archives/'.$archive->url;
+
+		if(is_file($path))
+		{
+			if(ini_get('zlib.output_compression')) { ini_set('zlib.output_compression', 'Off'); }
+
+
+			$this->load->helper('file');
+
+			$mime = get_mime_by_extension($path);
+			$name = $archive->url;
+
+			header('Pragma: public');     // required
+			header('Expires: 0');         // no cache
+			header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+			header('Last-Modified: '.gmdate ('D, d M Y H:i:s', filemtime ($path)).' GMT');
+			header('Cache-Control: private',false);
+			header('Content-Type: '.$mime);  // Add the mime type from Code igniter.
+			header('Content-Disposition: attachment; filename="'.basename($name).'"');  // Add the file name
+			header('Content-Transfer-Encoding: binary');
+			header('Content-Length: '.filesize($path)); // provide file size
+			header('Connection: close');
+			readfile($path); // push it out
+		}
+		exit();
 	}
 }
