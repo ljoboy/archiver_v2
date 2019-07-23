@@ -3,9 +3,15 @@
 		<div class="box">
 			<div class="box-header">
 				<h3 class="box-title">Liste des archives</h3>
+				<?php
+				if ($this->session->level <= ARCHIVISTE_LEVEL):
+				?>
 				<div class="box-tools">
 					<a href="<?php echo site_url('archive/add'); ?>" class="btn btn-success btn-sm">Ajouter</a>
 				</div>
+				<?php
+				endif;
+				?>
 			</div>
 			<div class="box-body">
 				<table class="table table-striped">

@@ -107,6 +107,9 @@
                                 <i class="fa fa-dashboard"></i> <span>Tableau de bord</span>
                             </a>
                         </li>
+						<?php
+						if ($this->session->level == ADMIN_LEVEL):
+						?>
 						<li>
                             <a href="#">
                                 <i class="fa fa-user"></i> <span>Utilisateurs</span>
@@ -120,6 +123,10 @@
                                 </li>
 							</ul>
                         </li>
+						<?php
+						endif;
+						if ($this->session->level <= ARCHIVISTE_LEVEL):
+						?>
 						<li>
 							<a href="#">
 								<i class="fa fa-archive"></i> <span>Archives</span>
@@ -133,6 +140,9 @@
 								</li>
 							</ul>
 						</li>
+						<?php
+						endif;
+						?>
                     </ul>
                 </section>
                 <!-- /.sidebar -->
