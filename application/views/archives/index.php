@@ -44,7 +44,7 @@
 							<td>
 								<a class="btn btn-info btn-xs" href="<?php echo site_url('archive/download/' . $archive->idArchi); ?>"
 								   target="_blank"><span class="fa fa-download"></span> Télécharger</a>
-								<a href="<?= site_url('') ?>"
+								<a href="<?= site_url('archive/voir/' . $archive->idArchi); ?>"
 								   class="btn btn-success btn-xs"><span class="fa fa-eye"></span> Voir</a>
 							</td>
 						</tr>

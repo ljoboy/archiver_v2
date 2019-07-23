@@ -8,7 +8,7 @@
 		<div class="box-body">
 			<div class="row">
 				<div class="col-md-6">
-					<img src="<?= base_url('archives/'.$url) ?>" alt="<?= $url ?>" class="img-thumbnail img-responsive" width="99%" />
+					<img src="<?= base_url('assets/img/File_96px.png') ?>" alt="<?= $url ?>" class="img-thumbnail img-responsive" width="99%" />
 				</div>
 				<div class="col-md-6">
 					<div class="form-group">

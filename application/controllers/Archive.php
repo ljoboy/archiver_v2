@@ -12,6 +12,11 @@ class Archive extends CI_Controller {
 		$this->load->model('archives');
 	}
 
+	public function dashboard()
+	{
+		$this->index();
+	}
+
 	public function index()
 	{
 		$params['limit'] = RECORDS_PER_PAGE;
@@ -134,4 +139,21 @@ class Archive extends CI_Controller {
 		}
 		exit();
 	}
+
+	public function voir($id)
+	{
+		if ($id){
+			$data['archive'] = $this->archives->get_archive($id);
+
+			$this->load->model('users');
+			$data['users'] = $this->users->get_all_users();
+
+			$data['_view'] = $this->load->view('archives/voir', $data, true);
+			$this->load->view('layouts/main',$data);
+		}else{
+			redirect('archive/index', 'refresh');
+		}
+	}
+
+
 }
