@@ -155,5 +155,37 @@ class Archive extends CI_Controller {
 		}
 	}
 
+	public function edit($id)
+	{
+		$this->form_validation->set_rules('code', 'code', 'trim|required|alpha_dash|min_length[6]|max_length[50]',
+			['required' => "Le %s est un champ obligatoire", 'alpha_dash' => "Le %s contient des caractères non supportés", 'min_length' => "Le %s doit contenir au moins 6 caractères", 'max_length' => "Le %s doit contenir moins de 50 caractères"]);
+		$this->form_validation->set_rules('nom', 'nom', 'trim|required|min_length[4]|max_length[50]',
+			['required' => "Le %s est un champ obligatoire", 'min_length' => "Le %s doit contenir au moins 4 caractères", 'max_length' => "Le %s doit contenir moins de 50 caractères"]);
+		$this->form_validation->set_rules('entreprise', 'entreprise', 'trim|required|alpha_numeric_spaces|min_length[4]|max_length[50]',
+			['required' => "Le %s est un champ obligatoire", 'alpha_numeric_spaces' => "Le %s contient des caractères non supportés", 'min_length' => "Le %s doit contenir au moins 4 caractères", 'max_length' => "Le %s doit contenir moins de 50 caractères"]);
 
+		if ($this->form_validation->run() == true) {
+			$archive = [
+				'nom' => $this->input->post('nom',true),
+				'codeArchi' => $this->input->post('code',true),
+				'entreprise' => $this->input->post('entreprise',true)
+			];
+			$updated = $this->archives->update_archive($id, $archive);
+			if ($updated){
+				$this->session->set_flashdata('succes', '<h4>Archive modifiée avec succès !</h4>');
+			}else{
+				$this->session->set_flashdata('error', '<h4>Erreur inattendu !</h4> veuillez réessayer plus tard svp...');
+			}
+			redirect('archive/index');
+		} else {
+			$img_infos['archive'] = $this->archives->get_archive($id);
+
+			if ($img_infos['archive']) {
+				$data['_view'] = $this->load->view('archives/edit', $img_infos, true);
+				$this->load->view('layouts/main', $data, false);
+			} else {
+				redirect('archive/index');
+			}
+		}
+	}
 }

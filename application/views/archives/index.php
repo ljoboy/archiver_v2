@@ -7,7 +7,15 @@
 				if ($this->session->level <= ARCHIVISTE_LEVEL):
 				?>
 				<div class="box-tools">
-					<a href="<?php echo site_url('archive/add'); ?>" class="btn btn-success btn-sm">Ajouter</a>
+					<div class="form-group">
+						<div class="col-sm-10">
+							<input class="form-control" id="code" name="search" required type="text" placeholder="Votre recherche ici..."/>
+							<span class="text-danger"><?php echo form_error('search'); ?></span>
+						</div>
+						<div class="col-sm-2">
+							<button class="btn btn-primary"><i class="fa fa-search"></i></button>
+						</div>
+					</div>
 				</div>
 				<?php
 				endif;
@@ -46,6 +54,8 @@
 								   target="_blank"><span class="fa fa-download"></span> Télécharger</a>
 								<a href="<?= site_url('archive/voir/' . $archive->idArchi); ?>"
 								   class="btn btn-success btn-xs"><span class="fa fa-eye"></span> Voir</a>
+								<a href="<?= site_url('archive/edit/' . $archive->idArchi); ?>"
+								   class="btn btn-warning btn-xs"><span class="fa fa-pencil"></span> Modifier</a>
 							</td>
 						</tr>
 						<?php $i++;
